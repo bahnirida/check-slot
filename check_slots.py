@@ -11,7 +11,7 @@ def notify_telegram(message: str):
     requests.post(url, data={"chat_id": TELEGRAM_CHAT_ID, "text": message})
 
 def run(playwright):
-    browser = playwright.chromium.launch(headless=False)  # set headless=True if you don't want a browser window
+    browser = playwright.chromium.launch(headless=True)  # set headless=True if you don't want a browser window
     context = browser.new_context(
         viewport={"width": 762, "height": 695}
     )
