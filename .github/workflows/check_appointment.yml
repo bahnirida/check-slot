@@ -2,15 +2,15 @@ name: Check MFA Appointment
 
 on:
   schedule:
-    - cron: "*/30 * * * *"  # Toutes les 30 minutes
-  workflow_dispatch:       # Pour l'exécuter manuellement depuis GitHub
+    - cron: "*/30 * * * *"  # every 30 minutes
+  workflow_dispatch:       # allow manual runs
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -23,5 +23,8 @@ jobs:
           pip install playwright requests
           playwright install chromium
 
-      - name: Run check_slots.py
+      - name: Run script
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python check_slots.py
