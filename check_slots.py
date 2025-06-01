@@ -1,10 +1,10 @@
 import requests
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
 from playwright.sync_api import sync_playwright
+import os
 
-
-TELEGRAM_TOKEN = "7741918636:AAEd0JkRfUCP0KS_7A2yGSE5pEDnLsG5A0o"
-TELEGRAM_CHAT_ID = "1412412145"
+TELEGRAM_TOKEN = os.environ["TELEGRAM_TOKEN"]
+TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
 def notify_telegram(message: str):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
@@ -21,11 +21,11 @@ def run(playwright):
     page.goto("https://pieraksts.mfa.gov.lv/en/egypt/index")
 
     # Fill in the form
-    page.fill('#Persons\\[0\\]\\[first_name\\]', 'rida')
+    page.fill('#Persons\\[0\\]\\[first_name\\]', 'xxemple')
     page.fill('#Persons\\[0\\]\\[last_name\\]', 'rd2000')
-    page.fill('#e_mail', 'rida@gmail.com')
-    page.fill('#e_mail_repeat', 'rida@gmail.com')
-    page.fill('#phone', '+212620839109')
+    page.fill('#e_mail', 'example@gmail.com')
+    page.fill('#e_mail_repeat', 'example@gmail.com')
+    page.fill('#phone', '+212666666666')
 
     # Click "Next step"
     page.click('#step1-next-btn > button')
